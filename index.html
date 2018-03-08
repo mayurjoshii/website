@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<!-- Main page of my updated lol -->
+<!-- Main page of my website -->
 <html>
   <head>
     <meta charset="utf-8">
@@ -109,7 +108,7 @@
       </div> <!-- End of hero-section -->
 
 
-      <div class="" id="how-it-works">
+      <div id="how-it-works">
 
         <h1>How it works.</h1>
 
@@ -272,28 +271,84 @@
       var x = document.getElementById("rect");
       var y = document.getElementById("hero-section");
 
+      var height = {
+        heroSection: $("#hero-section"),
+        howItWorks: $("#how-it-works"),
+        ebook: $("#ebook"),
+        hireMe: $("#hire-me"),
+        contact: $("#contact")
+      };
+
+
+      y.style.animationDelay = "6s";
       y.classList.add("fadeInLeft");
 
       // Do stuff when animation ends
       x.addEventListener("animationend",function(){
-
-      setTimeout(function(){
 
         // Perform the below operation after page loads
         x.style.animation = "slideOut 1s linear 1 forwards";
         $("path#hair").css("animation","hair-out 1s linear 1 forwards");
         $("path#eye").css("animation","eye-out 1s linear 1 forwards");
 
-        $("navbar,#logo").addClass("fadeInRightShort");
-        $("#greeting").addClass("fadeInLeftShort");
+        $("#logo").css("animation-delay","3s").addClass("fadeInRightShort");
+        $("#greeting").css("animation-delay","3s").addClass("fadeInLeftShort");
 
-        $("#explore").addClass("fadeInTopShort");
+        $("navbar").css("animation-delay","4s").addClass("fadeInRightShort");
+        $("#explore").css("animation-delay","6s").addClass("fadeInTopShort");
 
-      },200);
+       });
+
+     $(window).scroll(function(){
+
+      var window__scroll = $(window).scrollTop();
+
+      if( window__scroll > (height.heroSection.height() - 100) ){
+
+         var incrementDelay = 1;
+
+         height.howItWorks.addClass("fadeInLeft");
+         $("#how-it-works h1").css("animation-delay","1s").addClass("fadeInLeftShort");
+         $(".box").each(function(){
+             $(this).css("animation-delay",incrementDelay + "s").addClass("fadeInLeftShort");
+             $(this).next().css("animation-delay",(incrementDelay + 0.2) + "s").addClass("fadeInLeftShort");
+             incrementDelay += 0.4;
+         }).queue(function(){
+           $("#learn-more").css("animation-delay","2.5s").addClass("fadeInLeftShort");
+         });
 
 
+        // continue with arrow direction
 
-      });
+
+       }
+
+      if(window__scroll > (height.heroSection.height() + height.howItWorks.height() - 100) ){
+
+        height.ebook.addClass("fadeInLeftShort");
+
+
+      }
+
+      if(window__scroll > (height.heroSection.height() + height.howItWorks.height() + height.ebook.height() - 100) ){
+
+        height.hireMe.addClass("fadeInLeftShort");
+        $("#top h1").css("animation-delay","0.5s").addClass("fadeInLeftShort");
+        $("#top p").css("animation-delay","1s").addClass("fadeInLeftShort");
+
+        $(".content").css("animation-delay","1.8s").addClass("fadeInLeftShort");
+
+
+      }
+
+      if(window__scroll > (height.heroSection.height() + height.howItWorks.height() + height.ebook.height() + height.hireMe.height() - 30) ){
+        $("#shadow-box").addClass("fadeInLeftShort");
+
+        
+      }
+
+     }); // End of window scroll
+
     </script>
 
 
